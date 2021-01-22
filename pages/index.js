@@ -1,65 +1,40 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import HomeLayout from '@layouts/home-layout'
+import React from 'react'
+
+export async function getServerSideProps() {
+  // Aqui valida si el usuario esta loggeado o no
+  return {
+    props: {
+      // los datos que quieres que retorne si está loggeado
+    },
+    // si está loggeado descomenta las siguientes lineas para que redirija a la app
+    // redirect: {
+    //   destination: '/home',
+    //   permanent: false
+    // }
+  }
+}
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <HomeLayout>
+      <h1 className="mb-5">Iniciar sesión</h1>
+      <form className="mx-auto text-center" style={{maxWidth: '360px'}}>
+        <div className="form-group mb-3">
+          <input type="text" className="form-control text-center" placeholder="Usuario" id="usuario"/>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+        <div className="form-group mb-3">
+          <input type="password" className="form-control text-center" placeholder="Contraseña" id="usuario"/>
+        </div>
+        <div className="form-check form-switch text-start d-flex justify-content-center mb-5">
+          <input className="form-check-input me-2" type="checkbox" id="flexSwitchCheckDefault" />
+          <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Mostrar contraseña</label>
+        </div>
+        <div className="d-flex flex-column align-items-center">
+        <button type="submit" className="btn btn-primary">Iniciar sesión</button>
+        <button type="submit" className="btn btn-link">Crear cuenta</button>
+        </div>
+      </form>
+    </HomeLayout>
   )
 }
