@@ -10,9 +10,9 @@ function MyApp({ Component, pageProps }) {
     const loggedUser = localStorage.getItem('usuario'); // En vez de cookies se almacena en localStorage
     if (loggedUser) {
       const userToken = localStorage.getItem('token'); // En vez de cookies se almacena en localStorage
-      setUser({id: loggedUser, token: token})
+      setUser({id: loggedUser, token: userToken})
     } else {
-      Router.push('/');
+      Router.push('/login');
     }
   }, [])
 
@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
   const signOut = () => {
     localStorage.clear();
     setUser({id: null, token: null})
-    Router.push('/');
+    Router.push('/login');
   }
 
   return (

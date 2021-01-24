@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link'
+import UserContext from '@components/user-context'
 
 export default function DashboardLayout({current, children}) {
+  const {signOut} = useContext(UserContext)
+
+  const logout = () => {
+    signOut()
+  }
+
   return (
     <div className="container">
       <div className="row vh-100">
         <div className="col-md-3 py-5">
           <h3 className="mb-5">Panel de control</h3>
-          <ul className="nav nav-pills flex-column">
+          <ul className="nav nav-pills flex-column mb-5">
             <li className="nav-item">
               <Link href="/matrona">
                 <a className={"nav-link" + (current === 'matrona' ? ' active' : '')}>Matrona</a>
@@ -34,7 +41,7 @@ export default function DashboardLayout({current, children}) {
               </Link>
             </li>
           </ul>
-
+          <button type="button" className="btn btn-danger" onClick={logout}>Cerrar sesión</button>
         </div>
         <div className="col p-5">
           {children}

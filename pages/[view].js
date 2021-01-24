@@ -36,8 +36,16 @@ export default function View({view, menu}) {
   const title = view.charAt(0).toUpperCase() + view.slice(1);
   const { user } = useContext(UserContext) // puedes acceder al nombre del usuario con user.id y al token con user.token
 
+  if (user.id == null) {
+    return <span>Loading...</span>
+  }
+
   return (
     <DashboardLayout current={view}>
+      <div className="position-absolute d-flex flex-column" style={{top: 0, right: 0}}>
+        <span>Usuario: {user.id}</span>
+        <span>Token: {user.token}</span>
+      </div>
       <h1 className="mb-4">{title}</h1>
       <Nav menu={menu}>
         <Content id="tab-consulta" defaultView>
