@@ -1,18 +1,30 @@
 import UserContext from '@components/user-context'
 import HomeLayout from '@layouts/home-layout'
-import React, { useContext, useState } from 'react'
+import Router from 'next/router'
+import React, { useContext, useEffect, useState } from 'react'
 
 export default function Login() {
 
-  const {signIn} = useContext(UserContext)
+  const {user, signIn} = useContext(UserContext)
   const [visible, setVisible] = useState(false)
+  const [mount, setMount] = useState(false)
+
+  useEffect(() => {
+    if(user.id != null) {
+      Router.push('/')
+    } else {
+      setTimeout(() => {
+        setMount(true)
+      }, 500)
+    }
+  }, [user.id])
 
   const logIn = (e) => {
     e.preventDefault()
-    const user = document.querySelector('#user-name').value
+    const username = document.querySelector('#user-name').value
     const token = 'TOKENMAGICO'
 
-    signIn(user, token)
+    signIn(username, token)
   }
 
   const showPassword = () => {
@@ -20,6 +32,10 @@ export default function Login() {
     setVisible(passVisible)
   }
 
+  if (!mount) {
+    return <span>Loading...</span>
+  }
+  
   return (
     <HomeLayout>
       <h1 className="mb-5">Iniciar sesión</h1>
@@ -41,4 +57,5 @@ export default function Login() {
       </form>
     </HomeLayout>
   )
+  
 }

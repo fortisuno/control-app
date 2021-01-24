@@ -13,5 +13,5 @@ export default function Home() {
     }
   }, [user])
 
-  return <span>Loaging...</span>
+  return <span>Loading...</span>
 }
