@@ -1,7 +1,8 @@
 import Content from '@components/content';
 import Nav from '@components/nav';
+import UserContext from '@components/user-context';
 import DashboardLayout from '@layouts/dashboard-layout'
-import React, {useEffect} from 'react'
+import React, {useContext, useEffect} from 'react'
 
 export async function getStaticPaths() {
   return {
@@ -33,6 +34,7 @@ export async function getStaticProps({params}) {
 
 export default function View({view, menu}) {
   const title = view.charAt(0).toUpperCase() + view.slice(1);
+  const { user } = useContext(UserContext) // puedes acceder al nombre del usuario con user.id y al token con user.token
 
   return (
     <DashboardLayout current={view}>

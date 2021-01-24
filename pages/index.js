@@ -1,21 +1,22 @@
+import UserContext from '@components/user-context'
 import HomeLayout from '@layouts/home-layout'
-import React from 'react'
-
-export async function getServerSideProps() {
-  // Aqui valida si el usuario esta loggeado o no
-  return {
-    props: {
-      // los datos que quieres que retorne si está loggeado
-    },
-    // si está loggeado descomenta las siguientes lineas para que redirija a la app
-    // redirect: {
-    //   destination: '/home',
-    //   permanent: false
-    // }
-  }
-}
+import React, { useContext } from 'react'
 
 export default function Home() {
+
+  const {signIn} = useContext(UserContext)
+
+  const logIn = () => {
+    authUser(user, pass).then(resp => {
+      if(resp.ok) {
+        signIn(resp.user, resp.token)
+      } else {
+        //mensaje de error
+        console.log('Error al autenticar');
+      }
+    })
+  } 
+
   return (
     <HomeLayout>
       <h1 className="mb-5">Iniciar sesión</h1>
