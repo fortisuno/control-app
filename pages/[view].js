@@ -76,15 +76,20 @@ export default function View({view, menu}) {
             {
               registros != null
                 ? registros.length > 0
-                    ? (
-                        <li className="list-group-item">
-                          <div className="row text-center">
-                            <span className="col">Campo1</span>
-                            <span className="col">Campo2</span>
-                            <span className="col">Campo3</span>
-                            <span className="col">Campo4</span>
-                          </div>
-                        </li>
+                    ? registros.map(
+                        (registro, index) => {
+                          const {atributo1, atributo2, atributo3, atributo4} = registro   // atributos de cada registros, estos son los atributos de cada objeto del arreglo obtenido en la respuesta
+                          return (
+                            <li className="list-group-item" key={index}>
+                              <div className="row text-center">
+                                <span className="col">{atributo1}</span>
+                                <span className="col">{atributo2}</span>
+                                <span className="col">{atributo3}</span>
+                                <span className="col">{atributo4}</span>
+                              </div>
+                            </li>
+                          )
+                        }
                       )
                     : (
                         <li className="list-group-item text-center py-5">
